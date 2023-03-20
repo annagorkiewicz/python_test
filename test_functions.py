@@ -1,5 +1,5 @@
 from unittest import TestCase
-from functions import divide
+from functions import divide, multiply
 
 
 class TestFunctions(TestCase):
@@ -33,3 +33,35 @@ class TestFunctions(TestCase):
 
     def test_divide_error_on_zero_alternative(self):
         self.assertRaises(ValueError, lambda: divide(5, 0))
+
+    def test_multiply_empty(self):
+        with self.assertRaises(ValueError):
+            multiply()
+
+    def test_multiply_single_value(self):
+        expected_result = 5
+        self.assertEqual(multiply(expected_result), expected_result)
+
+    def test_multiply_zero(self):
+        expected_result = 0
+        self.assertEqual(multiply(expected_result), expected_result)
+
+    def test_multiply_result(self):
+        inputs = (3, 5)
+        expected_result = 15.0
+        self.assertEqual(multiply(*inputs), expected_result)
+
+    def test_multiply_input_with_zero(self):
+        inputs = (3, 5, 0)
+        expected_result = 0
+        self.assertEqual(multiply(*inputs), expected_result)
+
+    def test_multiply_negative(self):
+        inputs = (-3, 5, 1)
+        expected_result = -15.0
+        self.assertEqual(multiply(*inputs), expected_result)
+
+    def test_multiply_floats(self):
+        inputs = (3.5, 2)
+        expected_result = 7.0
+        self.assertEqual(multiply(*inputs), expected_result)
